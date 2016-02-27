@@ -1,0 +1,24 @@
+buildscript {
+	configurations.all { resolutionStrategy.cacheChangingModulesFor 0, 'seconds' }
+
+	repositories {
+		maven {
+			jcenter()
+			url "https://epsilony.net/nexus/content/groups/public"
+		}
+	}
+	dependencies { classpath 'net.epsilony.gradle:common-java:0.1.0-SNAPSHOT' }
+}
+apply plugin: 'net.epsilony.common-java'
+
+group = 'com.example'
+ext._version = '0.0.1'
+if(hasProperty('env')&&env=='product'){
+	version=_version
+}else{
+	version="${_version}-SNAPSHOT"
+}
+
+
+dependencies{ compile "ch.qos.logback:logback-classic:1.1.3" }
+
